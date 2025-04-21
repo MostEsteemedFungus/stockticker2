@@ -1,3 +1,4 @@
+//connect and set up server
 var http = require('http');
 var url = require('url');
 var { MongoClient } = require('mongodb');
@@ -14,6 +15,7 @@ http.createServer(async function (req, res) {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     const urlObj = url.parse(req.url, true);
 
+    //show the first view
     if (urlObj.pathname == "/") {
         res.write("<h1>Stock Search App</h1>");
         let s = `
@@ -38,7 +40,7 @@ http.createServer(async function (req, res) {
             res.end();
             return;
         }
-
+        //query the server based on user input
         const client = new MongoClient(uri);
         try {
             await client.connect();
@@ -51,7 +53,7 @@ http.createServer(async function (req, res) {
 
             const results = await collection.find(filter).toArray();
             console.log("Search results:", results);
-
+            //show results
             res.write(`<h2>Search Results for "${query}" (${searchType})</h2>`);
 
             if (results.length === 0) {
@@ -63,7 +65,7 @@ http.createServer(async function (req, res) {
                 });
                 res.write("</table>");
             }
-
+            //go back to first page
             res.write("<br><a href='/'>Search Again</a>");
             res.end();
 
