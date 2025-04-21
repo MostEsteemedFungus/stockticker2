@@ -1,0 +1,19 @@
+{
+  "name": "helloheroku",
+  "version": "1.0.0",
+  "description": "node app ",
+  "main": "stockapp2.js",
+  "scripts": {
+  "start": "node stockapp2.js"
+},
+  "repository": {
+  "type": "git",
+  "url": ""
+},
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+  "url": ""
+},
+  "homepage": ""
+}
